@@ -10,9 +10,12 @@ function setup() {
 		container = p5container
 	} else {
 		console.log('no container! ohoh')
-		canW = width
-		canH = height
+		canW = windowWidth
+		canH = windowHeight
 	}
+
+	console.log('width')
+
 
     let canvas = createCanvas(canW,canH)
     //canvas.parent(container)
