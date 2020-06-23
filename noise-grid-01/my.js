@@ -18,7 +18,6 @@ function setup() {
     canvas.parent(container)
 
     //actual code starts here
-	background('rgba(0, 255, 0, 1)')   
 
 	rows = 5
 	cols = 10 
@@ -28,6 +27,7 @@ function setup() {
 }
 
 function draw() {
+	background('rgba(0, 255, 0, 1)')   
 	fill('rgba(255, 255, 255, 1)')
 	for (let x; x < rows; x++) {
 		circle(10*x, 10, 20)
