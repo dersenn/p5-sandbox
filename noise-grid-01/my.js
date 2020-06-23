@@ -23,15 +23,15 @@ function setup() {
 	rows = 5
 	cols = 10 
 
-	
+
 
 }
 
 function draw() {
+	fill('rgba(255, 255, 255, 1)')
 	for (let x; x < rows; x++) {
-		circle(10*x,10,20)
+		circle(10*x, 10, 20)
 	}
-    
 }
 
 
