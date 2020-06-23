@@ -2,7 +2,6 @@ const p5container = document.getElementById('p5-container')
 let canW //canvas Width
 let canH //canvas Height
 
-
 function setup() {
 	if(p5container){
 	    console.log('container!')
@@ -20,6 +19,7 @@ function setup() {
 }
 
 function draw() {
+	background('rgba(0,255,0,1')
     
 }
 
