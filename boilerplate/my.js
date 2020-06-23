@@ -1,8 +1,8 @@
-//const container = document.getElementById('p5-container')
-if(document.getElementById('p5-container')){
+const container = document.getElementById('p5-container')
+if(container){
     console.log('container!')
 } else {
-	console.log('no container!')
+	console.log('no container! ohoh')
 }
 
 let canW = container.offsetWidth
