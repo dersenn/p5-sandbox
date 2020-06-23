@@ -2,7 +2,7 @@ const p5container = document.getElementById('p5-container')
 let container
 let canW //canvas Width
 let canH //canvas Height
-
+	
 function setup() {
 	if(p5container !== null){
 		console.log('no container! ohoh')
@@ -15,7 +15,7 @@ function setup() {
 		canH = container.offsetHeight
 	}
 
-	console.log('width')
+	console.log(width)
 
 
     let canvas = createCanvas(canW,canH)
