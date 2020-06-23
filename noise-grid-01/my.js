@@ -29,7 +29,7 @@ function setup() {
 function draw() {
 	background('rgba(0, 255, 0, 1)')   
 	fill('rgba(255, 255, 255, 1)')
-	circle(10, 10, 20)
+	//circle(10, 10, 20)
 	for (let x; x < rows; x++) {
 		circle(10*x, 10, 20)
 	}
