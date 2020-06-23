@@ -16,6 +16,5 @@ function setup() {
 }
 
 function draw() {
-	background('rgba(0,255,0,1')
     
 }
