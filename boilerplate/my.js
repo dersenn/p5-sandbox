@@ -1,15 +1,16 @@
 let container = document.getElementById('p5-container')
+let canW //canvas Width
+let canH //canvas Height
 
 if(container){
     console.log('container!')
+	canW = container.offsetWidth
+	canH = container.offsetHeight
 } else {
 	console.log('no container! ohoh')
-	container = document.body
+	canW = width
+	canH = height
 }
-
-let canW = container.offsetWidth
-let canH = container.offsetHeight
-
 
 function setup() {
     let canvas = createCanvas(canW,canH)
