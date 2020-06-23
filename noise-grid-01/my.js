@@ -24,13 +24,13 @@ function setup() {
 	cols = 10 
 
 	
-	for (let x; x < rows; x++) {
-		circle(10*x,10,20)
-	}
 
 }
 
 function draw() {
+	for (let x; x < rows; x++) {
+		circle(10*x,10,20)
+	}
     
 }
 
