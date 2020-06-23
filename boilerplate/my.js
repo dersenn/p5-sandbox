@@ -16,6 +16,7 @@ function setup() {
 
     let canvas = createCanvas(canW,canH)
     //canvas.parent(container)
+	background('rgba(0,255,0,1')    
 }
 
 function draw() {
