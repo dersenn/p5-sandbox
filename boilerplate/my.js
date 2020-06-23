@@ -1,25 +1,11 @@
-const p5container = document.getElementById('p5-container')
-let container
-let canW //canvas Width
-let canH //canvas Height
+const container = document.getElementById('p5-container')
+let canW = container.offsetWidth //canvas Width
+let canH = container.offsetHeight //canvas Height
+/* make sure there is a #p5-container in index.html. efforts to create a fallback to body have failed so far */
 	
 function setup() {
-	if(p5container !== null){
-		console.log('no container! ohoh')
-		canW = windowWidth
-		canH = windowHeight
-	} else {
-		container = p5container
-	    console.log('container!')
-		canW = container.offsetWidth
-		canH = container.offsetHeight
-	}
-
-	console.log(width)
-
-
     let canvas = createCanvas(canW,canH)
-    //canvas.parent(container)
+    canvas.parent(container)
 	background('rgba(0,255,0,1')    
 }
 
