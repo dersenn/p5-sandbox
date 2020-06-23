@@ -31,7 +31,7 @@ function draw() {
 	//circle(10, 10, 20)
 	for(let x = 0; x < canW; x += canW / rows) {
 		fill('rgba(255, 255, 255, 1)')
-		circle(10*x, 10*x, 20)
+		circle(10*x, 10*x, canW / rows)
 	}
 }
 
