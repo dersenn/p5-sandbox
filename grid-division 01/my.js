@@ -20,6 +20,10 @@ let canMin = Math.min(canW, canH) //shorter canvas side
 let elW
 let elH = elW
 
+let a
+let b
+
+
 
 	
 function setup() {
@@ -34,7 +38,8 @@ function setup() {
 }
 
 function draw() {
-	circle()
+	//algorithm()
+	circle(10,10,30,30)
     
 }
 
