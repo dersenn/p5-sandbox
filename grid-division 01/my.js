@@ -10,6 +10,10 @@ const container = document.getElementById('p5-container')
 
 // nothing achieved yet. not much tried yet.
 
+let myFont;
+function preload() {
+  myFont = loadFont('AK11Senn.Studio-Medium.otf') //not working due to CORS
+}
 
 
 let canW = container.offsetWidth //canvas Width
@@ -32,6 +36,9 @@ function setup() {
     canvas.parent(container)
 
     //actual code starts here
+    textSize(32)
+    textFont(myFont)
+    text('Hoi',canMax - canMin, canMax - canMin)
 
 
 	background('rgba(0, 255, 0, 1)')    
