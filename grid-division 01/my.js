@@ -23,37 +23,69 @@ let elH = elW
 let a
 let b
 
+let x
+let y
+let r
 
+let elements = []
 
-	
+// got carried away to a circle-packing thing on coding train...
+
 function setup() {
 	//initial setup of canvas and containing container (sic!)
     let canvas = createCanvas(canW,canH)
     canvas.parent(container)
 
     //actual code starts here
+	background('rgba(0, 255, 0, 1)') 
 
+	//for (let i = 0; i < 50; i++) {
+	while (elements.length < 25) {
 
-	background('rgba(0, 255, 0, 1)')    
+		let element = {
+			x: random(width),
+			y: random(height),
+			r: 32
+		}
+
+		let overlapping = false
+
+		for (let j = 0; j < elements.length; j++) {
+			let other = elements[j]
+			var d = dist(element.x, element.y, other.x, other.y)
+			if (d < element.r + other.r) {
+				//OVERLAP!
+				overlapping = true
+				break
+			}
+		}
+
+		if (!overlapping) {
+			elements.push(element)
+		}
+
+	for (let i = 0; i < elements.length; i++) {
+		fill(255,255,255,1)
+		ellipse(elements[i].x, elements[i].y, elements[i].r * 2, elements[i].r * 2)
+	}
+
+	}
 }
 
 function draw() {
-	//algorithm()
-	circle(10,10,30,30)
-    
 }
 
 // function to find biggest common denominator
 // from https://editor.p5js.org/hanxyn888@gmail.com/sketches/SyKFqikW4
-function algorithm() {
+/*function algorithm() {
   a = canW
   b = canH
   
   euclid();
-}
+}*/
 
 
-function euclid() {
+/*function euclid() {
   if (b == 0) {
     print(a);
     show(a);
@@ -65,7 +97,7 @@ function euclid() {
     euclid();
   }
 }
-
+*/
 // full sketch from above url
 
 /*
