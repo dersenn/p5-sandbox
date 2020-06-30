@@ -12,9 +12,13 @@ let canH = container.offsetHeight //canvas Height
 let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
+
+// a bit strict. should be changed according to orientation and on object/block level.
 let elW = canMin
 let elH = elW
 
+let numRows
+let rowH
 	
 function setup() {
 	//initial setup of canvas and containing container (sic!)
@@ -22,13 +26,73 @@ function setup() {
   canvas.parent(container)
 
   //actual code starts here
+  numRows = 1 // for testing purpose only. Would need to be adaptive to size...
+  rowH = canH / numRows
+}
+
+// 200630 — basic functionality is here... lets get it in order.
+// New Blocks position is off after the first round. also, the for-loop doesn't repeat.
+// Probably nesting and passed-on values is off... but getting there.
+
+function draw() {
+  background('rgba(0, 255, 0, 1)')
+  for (let y = 0; y < numRows; y++) {
+    createBlock(0, y * rowH, canW, rowH)
+  }
+  noLoop()
+}
+
+function createBlock(x, y, w, h) {
+  let longSide = Math.max(w, h)
+  let shortSide = Math.min(w, h)
+  let offset = shortSide / 2
+  let portrait
+  let incX
+  let incY
+  let nextBlockX
+  let nextBlockY
+  let remainder = longSide % shortSide
+  let nextBlockW
+  let nextBlockH
+  // Check Orientation
+  if (w > h) { 
+    portrait = false
+    incX = shortSide
+    incY = 0
+    nextBlockW = shortSide
+    nextBlockH = remainder
+  } else { 
+    portrait = true
+    incX = 0
+    incY = shortSide
+    nextBlockW = remainder
+    nextBlockH = shortSide
+  }
+
+  for (let i = 0; shortSide * (i + 1) < longSide; i++) {
+    drawCircle(x + offset + i * incX, y + offset + i * incY, shortSide)
+    nextBlockX = (i + 1) * incX
+    nextBlockY = (i + 1) * incY
+  }
+  console.log('remainder: ' +remainder)
+
+  if (remainder > 20) {
+    createBlock(nextBlockX, nextBlockY, nextBlockW, nextBlockH)
+  }
+
 
 }
 
+function drawCircle(x, y, d) {
+  circle(x, y, d)
+}
+
+
 // Working Proof of Concept (for Landscape. Only one level deep.)
 // Now: rewrite into functions, arrays, objects, etc., Implement Orientation Check.
+// New Version Above.
 
-
+/*
 function draw() {
   background('rgba(0, 255, 0, 1)')
   let blockStart
@@ -46,7 +110,7 @@ function draw() {
 
   noLoop()    
 }
-
+*/
 
 
 // Resize Function. Figure out a shorter way.
