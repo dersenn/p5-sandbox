@@ -71,8 +71,11 @@ function createBlock(x, y, w, h) {
 
   for (let i = 0; shortSide * (i + 1) < longSide; i++) {
     drawCircle(x + offset + i * incX, y + offset + i * incY, shortSide)
-    nextBlockX = (i + 1) * incX
-    nextBlockY = (i + 1) * incY
+    
+    // work on these !!!!
+    nextBlockX = x + i * incX
+    nextBlockY = y + i * incY
+    // do they need to be reset at some point? probably!
   }
   console.log('remainder: ' +remainder)
 
