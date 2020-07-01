@@ -35,7 +35,7 @@ function setup() {
 // Next: Clean up, simplify, maybe class/object, and an array (for use with non square element later)
 
 function draw() {
-  background('rgba(0, 255, 0, 1)')
+  background('rgba(0, 0, 0, 1)')
   
   numRows = Math.round(random(1,5)) // for testing purpose only. Would need to be adaptive to size...
   rowH = canH / numRows
