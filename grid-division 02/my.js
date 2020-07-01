@@ -27,16 +27,19 @@ function setup() {
   canvas.parent(container)
 
   //actual code starts here
-  numRows = 3 // for testing purpose only. Would need to be adaptive to size...
-  rowH = canH / numRows
 }
 
-// 200630 — basic functionality is here... lets get it in order.
-// New Blocks position is off after the first round. also, the for-loop doesn't repeat.
-// Probably nesting and passed-on values is off... but getting there.
+// 200701 - 12:15
+// working! :-)
+// Next: make random rows/cols switcher for more variation.
+// Next: Clean up, simplify, maybe class/object, and an array (for use with non square element later)
 
 function draw() {
   background('rgba(0, 255, 0, 1)')
+  
+  numRows = Math.round(random(1,5)) // for testing purpose only. Would need to be adaptive to size...
+  rowH = canH / numRows
+
   for (let y = 0; y < numRows; y++) {
     createBlock(0, y * rowH, canW, rowH)
   }
@@ -44,21 +47,18 @@ function draw() {
   //saveCanvas(canvas, 'grid-division', 'jpg')
 }
 
-// 200701 - 11:27
-// Semi Working. Offsets don't get passed on correctly. Also the Orientation is only set the first time around.
-
-
 function createBlock(x, y, w, h) {
-  fill(random()*255,0,0)
-  stroke(255, 0, 0)
-  rect(x,y,w,h)
-  fill(0, 255, 0)
-  text(blockCount, x, y + 20)
+  // for visualisation purpose only
+  // fill(0, random()*255, 0)
+  // stroke(255, 0, 0)
+  // rect(x,y,w,h)
+  // fill(0, 255, 0)
+  // text(blockCount, x, y + 20)
+
 
   let longSide = Math.max(w, h)
   let shortSide = Math.min(w, h)
   let offset = shortSide / 2
-  //let portrait
   let incX = 0
   let incY = 0
   let nextBlockX
@@ -67,45 +67,39 @@ function createBlock(x, y, w, h) {
   let nextBlockW
   let nextBlockH
   // Check Orientation
-  if (w > h) { 
-    portrait = false
+  if (w > h) { // is Landscape
     incX = shortSide
     incY = 0
-    nextBlockW = shortSide
-    nextBlockH = remainder
-  } else { 
-    portrait = true
-    incX = 0
-    incY = shortSide
     nextBlockW = remainder
     nextBlockH = shortSide
+  } else {  // is Portrait
+    incX = 0
+    incY = shortSide
+    nextBlockW = shortSide
+    nextBlockH = remainder
   }
 
   for (let i = 0; shortSide * (i + 1) < longSide; i++) {
     drawCircle(x + offset + i * incX, y + offset + i * incY, shortSide)
     
     // work on these !!!!
-    nextBlockX = (i + 1) * incX
-    nextBlockY = (i + 1) * incY
+    nextBlockX = x + (i + 1) * incX
+    nextBlockY = y + (i + 1) * incY
     // do they need to be reset at some point? probably!
   }
   console.log('remainder: ' +remainder)
-  blockCount++
-  if (remainder > 5) {
+  if (remainder > 2) {
     createBlock(nextBlockX, nextBlockY, nextBlockW, nextBlockH)
   }
 
-  console.log('Blocks: ' +blockCount+ ', x: ' +x+ ', y: ' +y+ ', w: ' +w+ ', h: ' +h)
-  x = 0
-  y = 0
-  w = 0
-  h = 0
-  delete portrait
+  blockCount++
+  console.log('Block ' +blockCount+ ':  x: ' +x+ ', y: ' +y+ ', w: ' +w+ ', h: ' +h)
 
 }
 
 function drawCircle(x, y, d) {
   fill(255)
+  noStroke()
   circle(x, y, d)
 }
 
@@ -142,5 +136,4 @@ function windowResized() {
 	canH = container.offsetHeight
   canMax = Math.max(canW, canH) //longer canvas side
   canMin = Math.min(canW, canH) //shorter canvas side
-  elW = canMin
 }
