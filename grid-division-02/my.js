@@ -27,12 +27,15 @@ function setup() {
   canvas.parent(container)
 
   //actual code starts here
+  frameRate(60)
 }
 
 // 200701 - 12:15
 // working! :-)
 // Next: make random rows/cols switcher for more variation.
 // Next: Clean up, simplify, maybe class/object, and an array (for use with non square element later)
+
+// problem: if remainder is 0, last circle isn't drawn...
 
 function draw() {
   background('rgba(0, 0, 0, 1)')
@@ -44,6 +47,7 @@ function draw() {
     createBlock(0, y * rowH, canW, rowH)
   }
   noLoop()
+
   //saveCanvas(canvas, 'grid-division', 'jpg')
 }
 
@@ -78,6 +82,12 @@ function createBlock(x, y, w, h) {
     nextBlockW = shortSide
     nextBlockH = remainder
   }
+  console.log('remainder: ' +remainder)
+
+// problem: if remainder is 0 last circle is not drawn.
+// solved with extra 'else if'. maybe there's a shorter way.
+// if statements and for loops can possibly be inverted (do the if first, then the loop...)
+// and also space out the last row of circles to cover up the remainder...
 
   for (let i = 0; shortSide * (i + 1) < longSide; i++) {
     drawCircle(x + offset + i * incX, y + offset + i * incY, shortSide)
@@ -87,9 +97,10 @@ function createBlock(x, y, w, h) {
     nextBlockY = y + (i + 1) * incY
     // do they need to be reset at some point? probably!
   }
-  console.log('remainder: ' +remainder)
-  if (remainder > 2) {
+  if (remainder >= 6) {
     createBlock(nextBlockX, nextBlockY, nextBlockW, nextBlockH)
+  } else if (remainder == 0) {
+    drawCircle(nextBlockX + offset, nextBlockY + offset, shortSide)
   }
 
   blockCount++
