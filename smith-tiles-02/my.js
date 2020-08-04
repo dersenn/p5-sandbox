@@ -18,8 +18,10 @@ function setup() {
 
     //actual code starts here
     frameRate(5)
-    nRows = Math.floor(random(2,30))
+    //nRows = Math.floor(random(2,30))
+    nRows = 5
     elW = canW / nRows
+    elStroke = elW / 4
 
 }
 
@@ -27,11 +29,11 @@ function draw() {
 	background('rgba(0, 255, 0, 1)')  
 	for (let x = 0; x <= canW; x += elW) {
 		for (let y = 0; y <= canH; y += elW) {
-			//grid(x,y)
+			grid(x,y)
 			tile(x,y,elW)
 		}
 	}
-	//noLoop()
+	noLoop()
 }
 
 function grid(x, y) {
@@ -46,14 +48,25 @@ function tile(x,y,w) {
 	//rotate(random(angles))
 	let rnd = random()
 	noFill()
-	strokeWeight(elW / 4)
-	if (rnd > 0.5) {
-		stroke(255)
+	strokeWeight(elStroke)
+	stroke(255)
+	if (rnd > 0.75) {
 		//fill(255)
 		arc(x, y, w, w, 0, HALF_PI)
 		arc(x + w, y + w, w, w, PI, PI + HALF_PI)
-	} else {
-		stroke(255)
+	}
+	else if (rnd > 0.5) {
+		//stroke(255,0,0)
+		line(x + w / 2, y, x + w / 2, y + w)
+		//circle(x + w / 2, y + w / 2, w / 2)
+	}
+	else if (rnd > 0.25) {
+		//stroke(255,0,0)
+		line(x, y + w / 2, x + w, y + w / 2)
+		//circle(x + w / 2, y + w / 2, w / 2)
+	}
+	 else {
+		//stroke(0,0,255)
 		//fill(255)
 		arc(x, y + w, w, w, PI + HALF_PI, 0)
 		arc(x + w, y, w, w, HALF_PI, PI)
