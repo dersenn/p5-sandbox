@@ -11,7 +11,9 @@ body {
 
 #p5-container {
 	position: absolute;
-	width: 50vw;
-	height: 100vh;
+	top: 0;
+	left: 0;
+	width: 100vmin;
+	height: 100vmin;
 	background: rgba(255,0,0,1);
 }
