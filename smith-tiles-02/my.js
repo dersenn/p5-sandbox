@@ -33,7 +33,7 @@ function draw() {
 		for (let y = 0; y <= canH - elW; y += elW) {
 			grid(x,y)
 			tile(x,y,elW)
-			tileCount += 1
+			tileCount ++
 		}
 	}
 	grid()
@@ -69,7 +69,6 @@ function tile(x,y,w) {
 		arc(x, y + w, w, w, PI + HALF_PI, 0)
 		arc(x + w, y, w, w, HALF_PI, PI)
 	}
-
 }
 
 function grid() {
