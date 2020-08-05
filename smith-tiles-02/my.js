@@ -10,6 +10,7 @@ let canMin = Math.min(canW, canH) //shorter canvas side
 
 let nRows
 let elW
+let tileCount
 	
 function setup() {
 	//initial setup of canvas and containing container (sic!)
@@ -22,25 +23,22 @@ function setup() {
     nRows = 5
     elW = canW / nRows
     elStroke = elW / 4
+    tileCount = 0
 
 }
 
 function draw() {
 	background('rgba(0, 255, 0, 1)')  
-	for (let x = 0; x <= canW; x += elW) {
-		for (let y = 0; y <= canH; y += elW) {
+	for (let x = 0; x <= canW - elW; x += elW) {
+		for (let y = 0; y <= canH - elW; y += elW) {
 			grid(x,y)
 			tile(x,y,elW)
+			tileCount += 1
 		}
 	}
+	grid()
+	console.log(tileCount)
 	noLoop()
-}
-
-function grid(x, y) {
-	stroke(0,244,0)
-	strokeWeight(1)
-	line(x,0,x,canH)
-	line(0,y,canW,y)
 }
 
 function tile(x,y,w) {
@@ -65,7 +63,7 @@ function tile(x,y,w) {
 		line(x, y + w / 2, x + w, y + w / 2)
 		//circle(x + w / 2, y + w / 2, w / 2)
 	}
-	 else {
+	else {
 		//stroke(0,0,255)
 		//fill(255)
 		arc(x, y + w, w, w, PI + HALF_PI, 0)
@@ -74,6 +72,16 @@ function tile(x,y,w) {
 
 }
 
+function grid() {
+	for (let x = elW; x <= canW - elW; x += elW) {
+		for (let y = elW; y <= canH - elW; y += elW) {
+			stroke(0,244,0)
+			strokeWeight(1)
+			line(x,0,x,canH)
+			line(0,y,canW,y)
+		}
+	}
+}
 
 function windowResized() {
 	resizeCanvas(canW, canH)
