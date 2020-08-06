@@ -8,11 +8,24 @@ let canH = container.offsetHeight //canvas Height
 let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
+// SOME VARIABLES
+let fps = 30
 let nRows = 5
-let elW = canW / nRows
+let hasBorder = true
+let divider
+let border
+let elW
+if (hasBorder == true) {
+	divider = nRows + 2
+	elW = canW / divider
+	border = elW
+} else {
+	divider = nRows
+	elW = canW / divider
+	border = 0
+}
 let elStroke = elW / 4
-//let tile
-let tiles = []
+let tiles
 let shuffledTiles
 	
 function setup() {
@@ -21,50 +34,47 @@ function setup() {
     canvas.parent(container)
 
     //actual code starts here
-    frameRate(5)
+    frameRate(fps)
+    tiles = []
     let angles = [0, HALF_PI]
-	for (let x = 0; x < canW; x += elW) {
-		for (let y = 0; y < canH; y += elW) {
+    //translate(border, border)
+	for (let x = border; x < canW - (border + 1); x += elW) {
+		for (let y = border; y < canH - (border + 1); y += elW) {
 		    rndAngle = angles[Math.floor(random(angles.length))]
 		    //if the angle is pushed into the array it stays that way. no change when looping.
 			tiles.push(new Tile(x, y, elW, rndAngle))
 		}
 	}
 	shuffledTiles = shuffle(tiles)
-	background('rgba(0, 255, 0, 1)')
 }
 
 function draw() {
 	// for...of loop. new shit. similar to inRange in Python / DrawBot.
-	for (let tile of shuffledTiles) {
-		if (tile.overTile(mouseX, mouseY)) {
-			tile.changeColor()
-		} else {
-			tile.revertColor()
-		}
+//	background('rgba(0, 255, 0, 1)')
+	background(0, 0, 0, 255)
+	for (let tile of tiles) { // or use shuffledTiles for different stacking.
 		tile.paint()
+		if (tile.overTile(mouseX, mouseY)) {
+			tile.changeColor(255)
+		} else {
+			tile.changeColor(0)
+		}
 	}
-	grid()
+	//grid()
 	//console.log(tiles.length)
-	
 	//noLoop()
+
 }
 
 function mousePressed() {
 	for (let i = 0; i < tiles.length; i++) {
 		if (tiles[i].overTile(mouseX, mouseY)) {
 			tiles[i].turn()
+			//tiles.splice(i, 1)
 		}
 	}
 }
-/*function hoverTile() {
-	for (let i = 0; i < tiles.length; i++) {
-		if (tiles[i].overTile(mouseX, mouseY) == true) {
-			tiles[i].changeColor()
-		}
-	}
-}
-*/
+
 class Tile {
 	constructor(x, y, w, a) {
 		this.x = x
@@ -72,8 +82,10 @@ class Tile {
 		this.w = w
 		this.r = this.w / 2
 		this.a = a
-		this.clr = 0
-		this.clrAlpha = 50
+		//this.t = 5 // seconds
+		//this.aInc = 0// HALF_PI / (this.t * fps)
+		this.clr = color(255)
+		this.bgClr = color(255, 0)
 	}
 	overTile(mx, my) {
 		if ((this.x < mx && mx < this.x + this.w) && (this.y < my && my < this.y + this.w)) {
@@ -81,33 +93,32 @@ class Tile {
 		} else {
 			return false
 		}
-
-/*		if ((this.x < mx && mx < this.x + this.w) && (this.y < my && my < this.y + this.w)) {
-			console.log('tile clicked')
-			console.log(this)
-			//this.clr = 255
-			this.a += HALF_PI
-		}
-*/		//for circles, use the distance fuction!
+		//for circles, use the distance fuction! then check if is smaller than radius.
 		//let d = dist(mx, my, this.x, this.y)
 	}
-	changeColor() {
-		this.clr = 255
-	}
-	revertColor() {
-		this.clr = 0
+	changeColor(c) {
+		this.clr = color(255 - c)
+		this.bgClr = color(255, c)
 	}
 	turn() {
 		this.a += HALF_PI
+		// tried to make the turn animated... but must probably happen in the loop somewhere.
+/*		for (let i = 0; i < this.t * fps; i++) {
+			this.aInc = HALF_PI / (this.t * fps)
+		}
+*/		
 	}
 	paint() {
-		stroke(this.clr)
-		strokeWeight(elStroke)
-		noFill()
 		// push() and pop(): similar to withSavedState in Python / Drawbot. Restores context. 
 		// Needed for rotation of single objects. In Conjunction with Translate, to move origin.
 		push()
-			translate(this.x + this.r, this.y + this.r)
+			translate(this.x + this.r, this.y + this.r) //set origin at center of tile
+			fill(this.bgClr)
+			rect(-this.r, -this.r, this.w, this.w);
+			stroke(this.clr)
+			strokeWeight(elStroke)
+			strokeCap(SQUARE)
+			noFill()
 			rotate(this.a)
 			arc( -this.r, -this.r, this.w, this.w, 0, HALF_PI)
 			arc( this.r, this.r, this.w, this.w, PI, PI + HALF_PI)
@@ -116,7 +127,7 @@ class Tile {
 }
 
 // FISHER-YATES SHUFFLE implemented from https://javascript.info/array-methods
-// used to change stacking order of elements.
+// used to change stacking order of elements. so that the x/y directions are not visible on overlap.
 function shuffle(array) {
 	for (let i = array.length - 1; i > 0; i--) {
     	let j = Math.floor(Math.random() * (i + 1));
@@ -128,7 +139,7 @@ function shuffle(array) {
 function grid() {
 	for (let x = elW; x < canW; x += elW) {
 		for (let y = elW; y < canH; y += elW) {
-			stroke(0,244,0)
+			stroke(0,246,0)
 			strokeWeight(1)
 			line(x,0,x,canH)
 			line(0,y,canW,y)
