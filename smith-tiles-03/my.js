@@ -13,6 +13,7 @@ let elW = canW / nRows
 let elStroke = elW / 4
 //let tile
 let tiles = []
+let shuffledTiles
 	
 function setup() {
 	//initial setup of canvas and containing container (sic!)
@@ -29,21 +30,41 @@ function setup() {
 			tiles.push(new Tile(x, y, elW, rndAngle))
 		}
 	}
+	shuffledTiles = shuffle(tiles)
 	background('rgba(0, 255, 0, 1)')
 }
 
 function draw() {
-	let shuffledTiles = shuffle(tiles)
 	// for...of loop. new shit. similar to inRange in Python / DrawBot.
 	for (let tile of shuffledTiles) {
-		tile.show()
+		if (tile.overTile(mouseX, mouseY)) {
+			tile.changeColor()
+		} else {
+			tile.revertColor()
+		}
+		tile.paint()
 	}
 	grid()
 	//console.log(tiles.length)
 	
-	noLoop()
+	//noLoop()
 }
 
+function mousePressed() {
+	for (let i = 0; i < tiles.length; i++) {
+		if (tiles[i].overTile(mouseX, mouseY)) {
+			tiles[i].turn()
+		}
+	}
+}
+/*function hoverTile() {
+	for (let i = 0; i < tiles.length; i++) {
+		if (tiles[i].overTile(mouseX, mouseY) == true) {
+			tiles[i].changeColor()
+		}
+	}
+}
+*/
 class Tile {
 	constructor(x, y, w, a) {
 		this.x = x
@@ -51,9 +72,36 @@ class Tile {
 		this.w = w
 		this.r = this.w / 2
 		this.a = a
+		this.clr = 0
+		this.clrAlpha = 50
 	}
-	show() {
-		stroke(random(255), 0, 0)
+	overTile(mx, my) {
+		if ((this.x < mx && mx < this.x + this.w) && (this.y < my && my < this.y + this.w)) {
+			return true
+		} else {
+			return false
+		}
+
+/*		if ((this.x < mx && mx < this.x + this.w) && (this.y < my && my < this.y + this.w)) {
+			console.log('tile clicked')
+			console.log(this)
+			//this.clr = 255
+			this.a += HALF_PI
+		}
+*/		//for circles, use the distance fuction!
+		//let d = dist(mx, my, this.x, this.y)
+	}
+	changeColor() {
+		this.clr = 255
+	}
+	revertColor() {
+		this.clr = 0
+	}
+	turn() {
+		this.a += HALF_PI
+	}
+	paint() {
+		stroke(this.clr)
 		strokeWeight(elStroke)
 		noFill()
 		// push() and pop(): similar to withSavedState in Python / Drawbot. Restores context. 
