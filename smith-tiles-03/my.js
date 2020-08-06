@@ -16,9 +16,9 @@ let divider
 let border
 let elW
 if (hasBorder == true) {
-	divider = nRows + 2
+	divider = nRows + 1
 	elW = canW / divider
-	border = elW
+	border = elW / 2
 } else {
 	divider = nRows
 	elW = canW / divider
@@ -135,7 +135,8 @@ function shuffle(array) {
 	}
 }
 
-//HELPER FUNCTION TO DISPLAY GRID
+// HELPER FUNCTION TO DISPLAY GRID
+// needs adjustment to account for new border option... but still works, kinda.
 function grid() {
 	for (let x = elW; x < canW; x += elW) {
 		for (let y = elW; y < canH; y += elW) {
@@ -147,8 +148,11 @@ function grid() {
 	}
 }
 
+// RESPONSIVE FUNCTION
+// broke somewhere along the way :-(
 function windowResized() {
 	resizeCanvas(canW, canH)
 	canW = container.offsetWidth
 	canH = container.offsetHeight
+	redraw()
 }
