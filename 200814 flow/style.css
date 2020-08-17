@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+#p5-container {
+    position: absolute;
+    width: 100vmin;
+    height: 100vmin;
+    top: 0;
+    left: 0;
+    background: rgba(255, 0, 0, 0);
+}
