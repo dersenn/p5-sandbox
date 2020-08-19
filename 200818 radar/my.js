@@ -11,16 +11,15 @@ let canMin = Math.min(canW, canH) //shorter canvas side
 let fr
 
 let inc = .1
-let nRows = 20
+let nRows = 1
 let nCols = nRows
 let elW, elH
 
+//let cells
 let v
 let zOff = 0
 
-let nParticles = 2500
 let particles = []
-let flowfield
 
 function setup() {
     //initial setup of canvas and containing container (sic!)
@@ -31,53 +30,49 @@ function setup() {
 
     //actual code starts here
     elW = width / nCols
-    elH = height / nRows
+    elH = width / nRows
+    //cells = []
 
-    flowfield = new Array(nCols * nRows)
-
-    for (let i = 0; i < nParticles; i++) {
+    for (let i = 0; i <= 50; i++) {
         newPos = createVector(random(width), random(height))
         particles[i] = new Particle(newPos)
     }
 
-    drawBg()
-    //noLoop()
+
+    //console.log(cells)
+    background('rgba(0, 0, 0, 1)')
 }
 
 function draw() {
-    //drawBg()
     let xOff = 0
-    for (let x = 0; x <= nCols; x++) {
+    for (let x = 0; x < nCols; x++) {
         let yOff = 0
-        for (let y = 0; y <= nRows; y++) {
+        for (let y = 0; y < nRows; y++) {
             let c = noise(yOff, xOff) * 255
-            let a = noise(yOff, xOff, zOff) * (TWO_PI * 2)
-
-            let index = x + y * elW // ???
-
+            let a = noise(yOff, xOff, zOff) * TWO_PI
             let v = p5.Vector.fromAngle(a)
-            v.setMag(.5) //controls snappyness to flowfield, but why?
-            flowfield[index] = v
 
             let g = new GridObject(x * elW, y * elH, elW, elH, c, v, a)
-            //g.paintCell()
-            //g.paintFlow()
+            g.paint()
+            //cells.push(new GridObject(x * elW, y * elH, elW, elH, c, v, a))
 
             yOff += inc
         }
-        xOff += inc //moves the flowfield
-        zOff += .001
+        xOff += inc
     }
+    // for (let cell of cells) {
+    //     cell.paint()
+    // }
+    zOff += .01
 
     for (let particle of particles) {
-        particle.render(flowfield)
-        // particle.follow(flowfield)
-        // particle.update()
-        // particle.paint()
-        // particle.bounds()
+        particle.update()
+        particle.paint()
+        particle.bounds()
     }
 
-    fr.html(floor(frameRate()));
+    //noLoop()
+    //fr.html(floor(frameRate()));
 }
 
 
@@ -91,35 +86,20 @@ class GridObject {
         this.v = v
         this.a = a
     }
-    paintCell() {
+    paint() {
         noStroke()
         fill(0, this.c, 0)
-        rect(this.x, this.y, this.w, this.h)
-    }
-    paintFlow() {
+        //rect(this.x, this.y, this.w, this.h)
         push()
-        //translate(this.x + this.w / 2, this.y + this.h / 2)
-        translate(this.x, this.y)
-
-        stroke(255, 0, 0)
-        strokeWeight(3)
-        point(0, 0)
-
-        rotate(this.v.heading())
-
-        stroke(255, 100)
+        stroke(255)
         strokeWeight(1)
-        line(0, 0, this.w, 0)
-        //line(-this.w / 3, -this.h / 3, this.w / 3, this.h / 3)
-        //line(-this.w, -this.h, this.w, this.h)
+        translate(this.x + this.w / 2, this.y + this.h / 2)
+        rotate(this.v.heading())
+        //line(-this.w / 3, -this.h / 3, this.w / 3, this.h / 3) 
+        line(-this.w, -this.h, this.w, this.h)
         pop()
 
     }
-}
-
-function drawBg() {
-    background('rgba(0, 0, 0, 1)')
-
 }
 
 
