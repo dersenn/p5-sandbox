@@ -12,6 +12,12 @@ main {
     display: flex;
 }
 
+#testID {}
+
+#testID:hover {
+    filter: blur(20px);
+}
+
 #p5-container {
     position: ;
     width: 100vmin;
@@ -19,6 +25,12 @@ main {
     top: 0;
     left: 0;
     background: rgba(255, 0, 0, 0);
+    filter: blur(0);
+    transition: filter 1s ease-in-out;
+}
+
+#p5-container:hover {
+    filter: blur(0);
 }
 
 #p5-controls {

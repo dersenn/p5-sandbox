@@ -9,9 +9,11 @@ let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 let center
 
-let noiseMax = .5
+let noiseMax = 1
 let slider
 let phase = 0
+let nPoints = 20
+let aInc
 
 function setup() {
     //initial setup of canvas and containing container (sic!)
@@ -22,37 +24,38 @@ function setup() {
     slider = createSlider(0, 20, 3)
     slider.parent(controls)
 
+    aInc = TWO_PI / nPoints
     //drawBg()
 }
 
 function draw() {
     drawBg()
-    translate(center)
-    stroke(255)
-    fill(255)
-    beginShape()
 
+    translate(center)
+    stroke(0, 255, 0)
+    fill(0, 255, 0)
+
+    beginShape()
+    curveVertex()
     noiseMax = slider.value()
-    for (let a = 0; a < TWO_PI; a += 0.2) {
+    for (let a = 0; a <= TWO_PI + aInc; a += aInc) {
         let xOff = map(cos(a + phase), -1, 1, 0, noiseMax)
         let yOff = map(sin(a), -1, 1, 0, noiseMax)
-        let r = map(noise(xOff, yOff), 0, 1, 100, 200)
+        let r = map(noise(xOff, yOff), 0, 1, width / 4, width / 3)
         let x = r * cos(a)
         let y = r * sin(a)
         curveVertex(x, y)
         xOff += .1
     }
-    endShape()
+    endShape(CLOSE)
 
     phase += .01
-
-
 }
 
 
 
 function drawBg() {
-    background(0, 0, 0, 255)
+    background(255)
 }
 
 //////////////////////////////////
@@ -71,8 +74,9 @@ function keyPressed() {
 }
 // Resize Window
 function windowResized() {
-    resizeCanvas(canW, canH)
     canW = container.offsetWidth
     canH = container.offsetHeight
+    resizeCanvas(canW, canH)
+    redraw()
     //maybe need to add redraw() ???
 }
