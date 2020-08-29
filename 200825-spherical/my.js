@@ -30,9 +30,9 @@ function draw() {
     rotateZ(å)
     let detail = 20
     for (let i = 0; i < detail; i++) {
-        let lon = map(i, 0, detail, -PI, PI)
+        let lon = map(i, 0, detail, -PI, PI) //longitude
         for (let j = 0; j < detail; j++) {
-            let lat = map(j, 0, detail, -HALF_PI, HALF_PI)
+            let lat = map(j, 0, detail, -HALF_PI, HALF_PI) //latitude
 
             let x = r * sin(lon) * sin(lat)
             let y = r * cos(lon)
