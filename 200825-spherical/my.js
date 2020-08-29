@@ -42,11 +42,13 @@ function draw() {
             let wght = map(z, -r, r, 5, 20)
             strokeWeight(wght)
             //stroke(j * 255 / detail)
+            stroke(0,255,0)
             point(x, y, z)
         }
     }
     a += 1 / 180
     å += 1 / 90
+
     // noStroke()
     // sphere(width / 4)
     // stroke(0)
