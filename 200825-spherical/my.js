@@ -23,12 +23,11 @@ function setup() {
 }
 
 function draw() {
-    orbitControl();
+    // orbitControl()
     drawBg()
     r = width / 4
     rotateY(a)
     rotateZ(å)
-    //directionalLight(255, 255, 255, width, height, width)
     let detail = 20
     for (let i = 0; i < detail; i++) {
         let lon = map(i, 0, detail, -PI, PI)
