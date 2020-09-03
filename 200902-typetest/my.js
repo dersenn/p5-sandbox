@@ -21,8 +21,8 @@ function setup() {
     canvas.parent(container)
 
     //actual code starts here
-    pts = font.textToPoints('Studio', 0, 0, 120, {
-        sampleFactor: 0.3,
+    pts = font.textToPoints('Update', 0, 0, 150, {
+        sampleFactor: 0.2,
         simplifyThreshold: 0
     })
 
@@ -38,7 +38,7 @@ function ns(x, y, z, scale_, min_, max_) {
 }
 
 let xz = 0;
-let yz = 1000;
+let yz = 0;
 
 
 function draw() {
@@ -47,6 +47,8 @@ function draw() {
     fill(0, 255, 0);
     push();
     translate(width / 5, height / 2);
+    let mX = mouseX - width / 5
+    let mY = mouseY - height / 2
     stroke(0, 255, 0)
     strokeWeight(3)
     point(0, 0)
@@ -56,7 +58,8 @@ function draw() {
         //ellipse(pts[i].x + xoff, pts[i].y + yoff, 1, 1);
         stroke(0, 255, 0)
         strokeWeight(1)
-        line(width / 2 - width / 5, height / 2, pts[i].x + xoff, pts[i].y + yoff)
+        //line(width / 2 - width / 5, height / 2, pts[i].x + xoff, pts[i].y + yoff)
+        line(mX, mY, pts[i].x + xoff, pts[i].y + yoff)
     }
     pop();
     xz += 1;
