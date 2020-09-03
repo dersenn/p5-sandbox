@@ -12,7 +12,7 @@ let font;
 let pts;
 
 function preload() {
-    font = loadFont("https://senn.studio/fonts/AK11SennStudio-Medium.woff")
+    font = loadFont('assets/ak11senn.studio-medium.otf')
 }
 
 function setup() {
