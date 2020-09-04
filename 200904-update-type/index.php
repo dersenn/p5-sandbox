@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php
+    $path = pathinfo(__FILE__);
+?>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        <?php echo $path['basename'], "\n"; ?>
+    </title>
+    <meta name="author" content="Christoph Senn">
+    <meta name="description" content="Experiments in p5.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets-global/base.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+    <section id="p5-container">
+    </section>
+    <script src="../assets-global/p5.min.js"></script>
+    <!--    <script src="../assets-global/p5.sound.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/opentype.js/0.7.3/opentype.min.js"></script>
+    <script src="my.js"></script>
+</body>
+
+</html>

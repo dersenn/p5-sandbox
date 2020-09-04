@@ -8,12 +8,20 @@ let canH = container.offsetHeight //canvas Height
 let canMax = Math.max(canW, canH) //longer canvas side
 let canMin = Math.min(canW, canH) //shorter canvas side
 
-let font;
-let pts;
+let f
+let txt
+let words
+let fSize = 30
+let pts
+let maxWidth
+let lineOffset
+let maxFound = false
 
 function preload() {
-    font = loadFont('assets/ak11senn.studio-medium.otf')
+    f = loadFont('assets/ak11senn.studio-medium.otf')
+    txt = 'Currently Updating'
 }
+
 
 function setup() {
     //initial setup of canvas and containing container (sic!)
@@ -21,14 +29,12 @@ function setup() {
     canvas.parent(container)
 
     //actual code starts here
-    pts = font.textToPoints('Update', 0, 0, 150, {
-        sampleFactor: 0.2,
-        simplifyThreshold: 0
-    })
+    textAlign(CENTER, BASELINE)
+    textFont(f)
+    words = txt.split(' ')
+    maxWidth = width * .8
+    console.log(words)
 
-
-
-    background('rgba(0, 255, 0, 1)')
 }
 
 function ns(x, y, z, scale_, min_, max_) {
@@ -37,33 +43,55 @@ function ns(x, y, z, scale_, min_, max_) {
         0, 1, min_, max_);
 }
 
-let xz = 0;
-let yz = 0;
+let xz = 0
+let yz = 0
 
 
 function draw() {
-    background(0);
-    noStroke();
-    fill(0, 255, 0);
-    push();
-    translate(width / 5, height / 2);
-    let mX = mouseX - width / 5
-    let mY = mouseY - height / 2
-    stroke(0, 255, 0)
-    strokeWeight(3)
-    point(0, 0)
-    for (let i = 0; i < pts.length; i++) {
-        let xoff = ns(pts[i].x, pts[i].y, xz, 0.005, -50, 50);
-        let yoff = ns(pts[i].y, pts[i].x, yz, 0.005, -50, 50);
-        ellipse(pts[i].x + xoff, pts[i].y + yoff, 1, 1);
-        stroke(0, 255, 0)
-        strokeWeight(1)
-        //line(width / 2 - width / 5, height / 2, pts[i].x + xoff, pts[i].y + yoff)
-        //line(mX, mY, pts[i].x + xoff, pts[i].y + yoff)
+    if (!maxFound) {
+        for (let i = 0; i < words.length; i++) {
+            textSize(fSize)
+            let tW = textWidth(words[i])
+            if (tW < maxWidth) {
+                fSize += 9
+            } else {
+                maxFound = true
+            }
+        }
+    } else {
+        background(255)
+        for (let j = 0; j < words.length; j++) {
+            //text(words[j], width / 2, (height / 2 - fSize / 4) + fSize * j)
+            let tW = textWidth(words[j])
+
+            //pts = f.textToPoints(words[j], width / 2, (height / 2 - fSize / 4) + fSize * j, fSize, {
+            pts = f.textToPoints(words[j], width / 2 - tW / 2, (height / 2 - fSize / 4) + fSize * j, fSize, {
+                sampleFactor: 0.1,
+                simplifyThreshold: 0
+            })
+            //console.log(pts[2])
+            for (let p = 0; p < pts.length; p++) {
+                let xoff = ns(pts[p].x, pts[p].y, xz, 0.005, -50, 50);
+                let yoff = ns(pts[p].y, pts[p].x, yz, 0.005, -50, 50);
+                push()
+                noStroke()
+                fill(0, 255, 0)
+                ellipse(pts[p].x + xoff, pts[p].y + yoff, 6, 6);
+                pop()
+            }
+            xz += .6;
+            yz += .6;
+
+        }
     }
-    pop();
-    xz += 1;
-    yz += 2;
+
+    //text(words, width / 2, height / 2)
+    push()
+    stroke(255, 0, 0)
+    strokeWeight(3)
+    point(width / 2, height / 2)
+    pop()
+    //noLoop()
 }
 
 
