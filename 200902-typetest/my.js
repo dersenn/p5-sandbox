@@ -59,7 +59,7 @@ function draw() {
   }
   pop();
   xz += 1;
-  yz += 1;    
+  yz += 2;    
 }
 
 
