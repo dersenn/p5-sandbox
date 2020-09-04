@@ -55,11 +55,11 @@ function draw() {
     for (let i = 0; i < pts.length; i++) {
         let xoff = ns(pts[i].x, pts[i].y, xz, 0.005, -50, 50);
         let yoff = ns(pts[i].y, pts[i].x, yz, 0.005, -50, 50);
-        //ellipse(pts[i].x + xoff, pts[i].y + yoff, 1, 1);
+        ellipse(pts[i].x + xoff, pts[i].y + yoff, 1, 1);
         stroke(0, 255, 0)
         strokeWeight(1)
         //line(width / 2 - width / 5, height / 2, pts[i].x + xoff, pts[i].y + yoff)
-        line(mX, mY, pts[i].x + xoff, pts[i].y + yoff)
+        //line(mX, mY, pts[i].x + xoff, pts[i].y + yoff)
     }
     pop();
     xz += 1;
