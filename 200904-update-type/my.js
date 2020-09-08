@@ -32,7 +32,7 @@ function setup() {
     textAlign(CENTER, BASELINE)
     textFont(f)
     words = txt.split(' ')
-    maxWidth = width * .8
+    maxWidth = width * .75
     console.log(words)
 
 }
@@ -65,7 +65,7 @@ function draw() {
             let tW = textWidth(words[j])
 
             //pts = f.textToPoints(words[j], width / 2, (height / 2 - fSize / 4) + fSize * j, fSize, {
-            pts = f.textToPoints(words[j], width / 2 - tW / 2, (height / 2 - fSize / 4) + fSize * j, fSize, {
+            pts = f.textToPoints(words[j], width / 2 - tW / 2, (height / 2 - fSize / 3) + fSize * j, fSize, {
                 sampleFactor: 0.1,
                 simplifyThreshold: 0
             })
