@@ -22,7 +22,7 @@ let sFact
 
 function preload() {
     f = loadFont('assets/ak11senn.studio-medium.otf')
-    txt = 'Currently Updating'
+    txt = 'Currently Updating.'
 }
 
 function setup() {
