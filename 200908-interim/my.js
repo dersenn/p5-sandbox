@@ -13,8 +13,8 @@ let pts = []
 let maxWidth
 let lineOffset
 let maxFound = false
-let ptMin = canMin / 99
-let ptMax = canMin / 94
+let ptMin = canMin / 100
+let ptMax = canMin / 96
 let ptsDef = false
 let xz
 let yz

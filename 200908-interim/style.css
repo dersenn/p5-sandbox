@@ -1,7 +1,7 @@
 @font-face {
     font-family: "AK11SennStudio";
-    src: url("../fonts/AK11Senn.Studio-Medium.woff2") format("woff2"),
-        url("../fonts/AK11Senn.Studio-Medium.woff") format("woff");
+    src: url("fonts/AK11Senn.Studio-Medium.woff2") format("woff2"),
+        url("fonts/AK11Senn.Studio-Medium.woff") format("woff");
 }
 
 @font-face {
@@ -114,7 +114,7 @@ main {
 
 .address,
 .info {
-    padding: 2rem;
+    padding: var(--spacer);
     flex-grow: 1;
 }
 
