@@ -100,10 +100,6 @@ canvas {
     filter: blur(var(--spacer);
 }
 
-#theDisc:hover {
-    background-color: var(--highlight);
-    filter: blur(0);
-}
 
 main {
     position: absolute;
@@ -125,7 +121,6 @@ main {
 
 .info {
     line-height: 1.2;
-    flex-grow: 1;
 }
 
 ul {
