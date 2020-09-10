@@ -128,7 +128,7 @@ main {
 }
 
 ul {
-    margin-bottom: var(--spacer)
+    margin-bottom: var(--spacer);
 }
 
 ul> :first-child {
