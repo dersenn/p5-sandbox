@@ -95,12 +95,13 @@ canvas {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    background-color: var(--highlight);
+    background-color: var(--dark);
     cursor: pointer;
     filter: blur(var(--spacer);
 }
 
 #theDisc:hover {
+    background-color: var(--highlight);
     filter: blur(0);
 }
 
