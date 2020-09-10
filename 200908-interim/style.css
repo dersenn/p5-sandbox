@@ -106,7 +106,7 @@ canvas {
     transition: all .5s ease-in-out;
 }
 
-.info-active main {
+.info-active #main {
     transform: translateX(0);
 }
 
