@@ -97,7 +97,7 @@ canvas {
     filter: blur(0);
 }
 
-main {
+#main {
     position: absolute;
     overflow: hidden;
     display: grid;
