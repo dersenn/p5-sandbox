@@ -4,12 +4,6 @@
         url("fonts/AK11Senn.Studio-Medium.woff") format("woff");
 }
 
-@font-face {
-    font-family: "GT-Alpina-Reg";
-    src: url("../fonts/GT-Alpina-Standard-Regular.woff2") format("woff2"),
-        url("../fonts/GT-Alpina-Standard-Regular.woff") format("woff");
-}
-
 *,
 *::before,
 *::after {
@@ -54,14 +48,12 @@ a:visited {
     text-decoration: none;
     opacity: .66;
     border-bottom: calc(1rem / 9) solid transparent;
-    /*  border-bottom: 3px solid transparent; */
 }
 
 a:hover,
 a:active {
     opacity: 1;
     border-bottom: calc(1rem / 9) solid var(--highlight);
-    /*  border-bottom: 3px solid var(--highlight); */
 }
 
 
@@ -100,6 +92,10 @@ canvas {
     filter: blur(var(--spacer);
 }
 
+#theDisc:hover {
+    background-color: var(--highlight);
+    filter: blur(0);
+}
 
 main {
     position: absolute;
