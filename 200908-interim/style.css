@@ -97,6 +97,11 @@ canvas {
     border-radius: 50%;
     background-color: var(--highlight);
     cursor: pointer;
+    filter: blur(var(--spacer);
+}
+
+#theDisc:hover {
+    filter: blur(0);
 }
 
 main {
