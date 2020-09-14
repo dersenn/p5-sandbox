@@ -87,14 +87,19 @@ canvas {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    background-color: var(--dark);
+    background-color: var(--highlight);
     cursor: pointer;
-    filter: blur(var(--spacer);
+    filter: blur(var(--spacer));
+    transition: all .3s ease-in-out;
 }
 
 #theDisc:hover {
     background-color: var(--highlight);
     filter: blur(0);
+}
+
+.info-active #theDisc {
+    background-color: var(--highlight);
 }
 
 #main {
@@ -126,7 +131,6 @@ ul {
 ul> :first-child {
     padding-bottom: var(--half-spacer);
 }
-
 
 .address {}
 
