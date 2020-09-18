@@ -102,7 +102,7 @@ function draw() {
 
 
 function windowResized() {
-    resizeCanvas(canW, canH)
     canW = container.offsetWidth
     canH = container.offsetHeight
+    resizeCanvas(windowWidth, windowHeight)
 }
