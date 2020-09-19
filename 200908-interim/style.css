@@ -17,7 +17,7 @@
     --min-fsize: 15;
     --max-fsize: 30;
     --int-fsize: calc(var(--min-fsize) * 1px + (var(--max-fsize) - var(--min-fsize)) * ((100vw - 375px) / (1200 - 375)));
-    --spacer: .75rem;
+    --spacer: 1rem;
     --half-spacer: calc(var(--spacer) / 2);
     --light: rgba(255, 255, 255, 1);
     --medium: rgba(0, 0, 0, .6);
@@ -135,6 +135,18 @@ ul> :first-child {
 .address {}
 
 .info {}
+
+
+@media screen and (min-width: 375px) {
+    :root {}
+}
+
+@media screen and (min-width: 1200px) {
+    :root {
+        --spacer: 1.5rem;
+
+    }
+}
 
 
 
