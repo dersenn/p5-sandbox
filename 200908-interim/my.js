@@ -27,7 +27,7 @@ function preload() {
 
 function setup() {
     //initial setup of canvas and containing container (sic!)
-    let canvas = createCanvas(canW, canH)
+    let canvas = createCanvas(windowWidth, windowHeight)
     canvas.parent(container)
 
     //actual code starts here
@@ -40,7 +40,6 @@ function setup() {
 
     xz = random(1, 100)
     yz = random(1, 100)
-
 }
 
 function n(x, y, z, scale_, min_, max_) {
