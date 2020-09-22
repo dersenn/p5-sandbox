@@ -65,7 +65,7 @@ function draw() {
         if (!ptsDef) {
             for (let j = 0; j < words.length; j++) {
                 tWj = textWidth(words[j])
-                if (width <= 375) {
+                if (width <= 568) {
                     sFact = 0.2
                 } else {
                     sFact = 0.1
@@ -112,14 +112,13 @@ function resetVars() {
 
 function windowResized() {
     // resetVars()
-    // canW = container.offsetWidth
-    // canH = container.offsetHeight
-    // canMax = Math.max(canW, canH) //longer canvas side
-    // canMin = Math.min(canW, canH) //shorter canvas side
+    canW = container.offsetWidth
+    canH = container.offsetHeight
+    canMax = Math.max(canW, canH) //longer canvas side
+    canMin = Math.min(canW, canH) //shorter canvas side
     fSize = 30
-    // maxWidth = 0
-    // ptMin = canMin / 100
-    // ptMax = canMin / 96
+    ptMin = canMin / 100
+    ptMax = canMin / 96
     maxFound = false
     xz = random(1, 100)
     yz = random(1, 100)
