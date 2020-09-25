@@ -92,7 +92,7 @@ canvas {
     border-radius: 50%;
     background-color: var(--highlight);
     cursor: pointer;
-    filter: blur(var(--spacer));
+    filter: blur(var(--half-spacer));
     transition: all .3s ease-in-out;
 }
 
