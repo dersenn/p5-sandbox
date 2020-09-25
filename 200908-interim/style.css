@@ -19,6 +19,7 @@
     --int-fsize: calc(var(--min-fsize) * 1px + (var(--max-fsize) - var(--min-fsize)) * ((100vw - 375px) / (1200 - 375)));
     --spacer: 1rem;
     --half-spacer: calc(var(--spacer) / 2);
+    --quarter-spacer: calc(var(--spacer) /4);
     --light: rgba(255, 255, 255, 1);
     --medium: rgba(0, 0, 0, .6);
     --dark: rgba(0, 0, 0, 1);
@@ -131,7 +132,7 @@ ul {
 }
 
 ul> :first-child {
-    padding-bottom: var(--half-spacer);
+    padding-bottom: var(--quarter-spacer);
 }
 
 .address {}

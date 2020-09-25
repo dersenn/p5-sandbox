@@ -22,6 +22,8 @@ let sFact
 let tW
 let tWj
 
+let asc, desc
+
 
 function preload() {
     f = loadFont('assets/ak11senn.studio-medium.otf')
@@ -42,10 +44,10 @@ function setup() {
     yz = random(1, 100)
 }
 
-function n(x, y, z, scale_, min_, max_) {
+function n(x, y, z, scale, min, max) {
     return map(
-        noise(x * scale_, y * scale_, z * scale_),
-        0, 1, min_, max_);
+        noise(x * scale, y * scale, z * scale),
+        0, 1, min, max);
 }
 
 function draw() {
@@ -53,9 +55,12 @@ function draw() {
         for (let i = 0; i < words.length; i++) {
             maxWidth = width * .75
             textSize(fSize)
+            asc = textAscent()
+            desc = textDescent()
+            console.log(fSize, asc, desc)
             tW = textWidth(words[i])
             console.log(fSize)
-            if (tW <= maxWidth) {
+            if (tW < maxWidth && (asc + desc) * words.length < height) {
                 fSize += 9
             } else {
                 maxFound = true
