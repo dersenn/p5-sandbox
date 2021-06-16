@@ -80,3 +80,21 @@ button:active {
     text-align: right;
     padding: 2em;
 }
+
+#index {
+  padding: 3em;
+  line-height: 1.2;
+}
+
+#index h1 {
+  font-weight: bold;
+}
+
+#index ul {
+  list-style-type: circle;
+  margin-top: .5em;
+}
+
+#index em {
+  font-style: italic;
+}
