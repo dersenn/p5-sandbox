@@ -86,15 +86,22 @@ input, textarea, select {
 }
 
 .controls button {
+  margin-right: 1em;
   padding: 1em 2em;
   border-radius: 2em;
   border: none;
   background: #fff;
   cursor: pointer;
+  box-shadow: 0 0 2em #0f0;
+  transition: all .2s ease-in;
 }
 
-button:hover,
-button:active {
-  background: #000;
+.controls button:hover,
+.controls button:active {
+  background: #0f0;
   color: #fff;
+}
+
+.controls button:last-child {
+  margin-right: 0;
 }
