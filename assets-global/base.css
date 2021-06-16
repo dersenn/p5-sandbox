@@ -59,7 +59,33 @@ input, textarea, select {
   text-rendering: optimizeLegibility;
 }
 
-button {
+.controls {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    text-align: right;
+    padding: 2em;
+}
+
+.index {
+  padding: 3em;
+  line-height: 1.2;
+}
+
+.index h1 {
+  font-weight: bold;
+}
+
+.index ul {
+  list-style-type: circle;
+  margin-top: .5em;
+}
+
+.index em {
+  font-style: italic;
+}
+
+.controls button {
   padding: 1em 2em;
   border-radius: 2em;
   border: none;
@@ -71,30 +97,4 @@ button:hover,
 button:active {
   background: #000;
   color: #fff;
-}
-
-#controls {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    text-align: right;
-    padding: 2em;
-}
-
-#index {
-  padding: 3em;
-  line-height: 1.2;
-}
-
-#index h1 {
-  font-weight: bold;
-}
-
-#index ul {
-  list-style-type: circle;
-  margin-top: .5em;
-}
-
-#index em {
-  font-style: italic;
 }
