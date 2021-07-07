@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title><?php echo basename(__DIR__) ?> — p5 sandbox</title>
+    <title> — p5 sandbox</title>
 
     <meta name="author" content="Christoph Senn">
     <meta name="description" content="Experiments in p5.js">
@@ -24,9 +24,19 @@
         <!--<button onClick="window.history.back();">&larr;</button>-->
     </section>
 
+    <script src="../assets-global/global.js"></script>
     <script src="../assets-global/p5.min.js"></script>
     <script src="my.js"></script>
     <script src="objects.js"></script>
+    <script>
+        (function() {
+            var location = window.location.pathname;
+            var path = location.substring(0, location.lastIndexOf("/"));
+            var directoryName = path.substring(path.lastIndexOf("/")+1);
+            document.title = directoryName
+        })();
+    </script>
+
 
 </body>
 
